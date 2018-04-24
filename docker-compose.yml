@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  core-testing-sample:
+    image: coretestingsample
+    build:
+      context: .
+      dockerfile: core-testing-sample/Dockerfile

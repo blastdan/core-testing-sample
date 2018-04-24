@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  core-testing-sample:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
