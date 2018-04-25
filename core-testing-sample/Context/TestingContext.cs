@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreTestingSample.Models;
 
 namespace CoreTestingSample.Context
 {
@@ -29,8 +30,11 @@ namespace CoreTestingSample.Context
                          
             personBuilder.HasOne(p => p.Company)
                          .WithOne(c => c.Person)
-                         .HasForeignKey<Company>(a => a.PersonId); ;
-                
+                         .HasForeignKey<Company>(a => a.PersonId);
+
+            personBuilder.HasIndex(p => p.FirstName);
+            personBuilder.HasIndex(p => p.LastName);
+
             modelBuilder.Entity<Company>()
                         .ToTable("company")
                         .HasKey(c => c.Id);
@@ -41,5 +45,7 @@ namespace CoreTestingSample.Context
 
             base.OnModelCreating(modelBuilder);
         }
+
+        public DbSet<CoreTestingSample.Models.People> People { get; set; }
     }
 }

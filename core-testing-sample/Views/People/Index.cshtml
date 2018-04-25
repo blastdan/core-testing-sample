@@ -1,0 +1,20 @@
+﻿@model IEnumerable<People>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Users</h2>
+
+<form>
+    <p>
+        Name: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+
+@foreach (var item in Model)
+{
+    @await Html.PartialAsync("People", item)
+}

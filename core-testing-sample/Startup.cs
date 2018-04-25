@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CoreTestingSample.Context;
+using CoreTestingSample.Repositories;
+using CoreTestingSample.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,9 @@ namespace CoreTestingSample
             services.AddDbContext<TestingContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
 
+            services.AddTransient<IPersonService, PersonService>();
+            services.AddTransient<IPersonRepository, PersonRepository>();
+            
 
             services.AddMvc();
         }

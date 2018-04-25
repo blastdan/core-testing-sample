@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using CoreTestingSample.Context;
 using CoreTestingSample.Context.DataModels;
+using CoreTestingSample.Models;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,7 @@ namespace CoreTestingSample
                 cfg.CreateMap<Bogus.Person, Person>();
                 cfg.CreateMap<CardAddress, Address>();
                 cfg.CreateMap<CardCompany, Company>();
+                cfg.CreateMap<Person, People>();
             });
 
             // Seed data
