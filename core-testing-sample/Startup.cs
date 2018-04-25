@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreTestingSample.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace core_testing_sample
+namespace CoreTestingSample
 {
     public class Startup
     {
@@ -21,6 +23,10 @@ namespace core_testing_sample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TestingContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+
+
             services.AddMvc();
         }
 

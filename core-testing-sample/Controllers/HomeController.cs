@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CoreTestingSample.Models;
 using Microsoft.AspNetCore.Mvc;
-using core_testing_sample.Models;
 
-namespace core_testing_sample.Controllers
+namespace CoreTestingSample.Controllers
 {
     public class HomeController : Controller
     {

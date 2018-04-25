@@ -1,6 +1,6 @@
 using System;
 
-namespace core_testing_sample.Models
+namespace CoreTestingSample.Models
 {
     public class ErrorViewModel
     {
