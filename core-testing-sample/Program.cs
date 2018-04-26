@@ -20,14 +20,7 @@ namespace CoreTestingSample
         {
             var host = BuildWebHost(args);
 
-            // auto mapper
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<Bogus.Person, Person>();
-                cfg.CreateMap<CardAddress, Address>();
-                cfg.CreateMap<CardCompany, Company>();
-                cfg.CreateMap<Person, People>();
-            });
+            Bootstrap.AutoMapper();
 
             // Seed data
             using (var scope = host.Services.CreateScope())
