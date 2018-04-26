@@ -35,5 +35,10 @@ namespace CoreTestingSample.Repositories
         {
             return await base.GetAsync(filter, orderBy, this.includes);
         }
+
+        public Person GetFullPersonById(Guid personId)
+        {
+            return this.Get(x => x.Id == personId, null, this.includes).SingleOrDefault();
+        }
     }
 }

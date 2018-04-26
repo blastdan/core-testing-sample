@@ -12,7 +12,7 @@ namespace CoreTestingSample.Context
     {
         public TestingContext(DbContextOptions<TestingContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<Person> Persons { get; set; }

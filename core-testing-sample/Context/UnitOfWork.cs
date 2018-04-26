@@ -7,5 +7,6 @@ namespace CoreTestingSample.Context
 {
     public class UnitOfWork
     {
+
     }
 }
