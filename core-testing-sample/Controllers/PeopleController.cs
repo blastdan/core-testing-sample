@@ -9,7 +9,7 @@ using CoreTestingSample.Context;
 using CoreTestingSample.Context.DataModels;
 using CoreTestingSample.Services;
 
-namespace core_testing_sample.Controllers
+namespace CoreTestSample.Controllers
 {
     public class PeopleController : Controller
     {

@@ -25,8 +25,7 @@ namespace CoreTestingSample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TestingContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
+            this.ConfigureDatabase(services);
 
             services.AddTransient<IPersonService, PersonService>();
             services.AddTransient<IPersonRepository, PersonRepository>();
@@ -36,7 +35,7 @@ namespace CoreTestingSample
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -56,6 +55,12 @@ namespace CoreTestingSample
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+
+        public virtual void ConfigureDatabase(IServiceCollection services)
+        {
+            services.AddDbContext<TestingContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("DataAccessPostgreSqlProvider")));
         }
     }
 }

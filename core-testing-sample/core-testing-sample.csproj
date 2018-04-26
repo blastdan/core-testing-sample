@@ -5,6 +5,7 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <RootNamespace>CoreTestingSample</RootNamespace>
     <DebugType>full</DebugType>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +27,4 @@
     <Folder Include="Context\Interfaces\" />
     <Folder Include="Models\NewFolder\" />
   </ItemGroup>
-
 </Project>
