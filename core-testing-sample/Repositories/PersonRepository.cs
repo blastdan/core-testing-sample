@@ -16,12 +16,6 @@ namespace CoreTestingSample.Repositories
             x => x.Company
         };
 
-        private Func<Person, object>[] includeds = new Func<Person, object>[]
-        {
-            new Func<Person, object>(p => p.Address)
-        };
-
-
         public PersonRepository(TestingContext context) : base(context)
         {   
         }
@@ -38,7 +32,7 @@ namespace CoreTestingSample.Repositories
 
         public Person GetFullPersonById(Guid personId)
         {
-            return this.Get(x => x.Id == personId, null, this.includes).SingleOrDefault();
+            return this.Get(x => x.Id == personId, null, this.includes).Single();
         }
     }
 }

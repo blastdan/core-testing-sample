@@ -68,6 +68,7 @@ namespace CoreTestingSample.Test.Repositories
                 var Target = new PersonRepository(context);
                 Actual = Target.GetFullPersonById(Input.person.Id);
             }
+                        
             Actual.Should().BeEquivalentTo(Input.person, 
                                            op => op.Excluding(p => p.Address.Person)
                                                    .Excluding(p => p.Company.Person), 
@@ -106,6 +107,29 @@ namespace CoreTestingSample.Test.Repositories
                                            op => op.Excluding(p => p.Address.Person)
                                                    .Excluding(p => p.Company.Person),
                                            "the data had been saved and received from the database");
+        }
+
+        [Test, Description("Inserts a list persons into the database and retreives them all")]
+        [Category("Database Access")]
+        public void FindPersonByIdFailure()
+        {
+            var Input = new
+            {
+                options = this.GenerateOptions("AddPersonsSuccessTest")
+            };
+
+            Context.DataModels.Person Actual;
+
+            Action act = () =>
+            {
+                using (var context = new TestingContext(Input.options))
+                {
+                    var Target = new PersonRepository(context);
+                    Actual = Target.GetFullPersonById(Guid.NewGuid());
+                }
+            };
+
+            act.Should().Throw<InvalidOperationException>("the id does not exist in the database");
         }
 
         private IEnumerable<Context.DataModels.Person> GeneratePeople(int number)

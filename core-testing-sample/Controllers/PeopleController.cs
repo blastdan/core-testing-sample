@@ -25,7 +25,7 @@ namespace core_testing_sample.Controllers
         {
             var people = string.IsNullOrWhiteSpace(searchString)
                             ? await personService.GetAllPeopleAsync()
-                            : await personService.GetAllPeopleAsync(searchString);
+                            : await personService.SearchPeople(searchString);
 
             return View(people);
         }

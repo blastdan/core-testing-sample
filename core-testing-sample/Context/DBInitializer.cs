@@ -41,7 +41,21 @@ namespace CoreTestingSample.Context
                 Mapper.Map<DataModels.Person>(new Bogus.Person()),
                 Mapper.Map<DataModels.Person>(new Bogus.Person()),
                 Mapper.Map<DataModels.Person>(new Bogus.Person()),
-                Mapper.Map<DataModels.Person>(new Bogus.Person())
+                Mapper.Map<DataModels.Person>(new Bogus.Person()),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
+                Mapper.Map<DataModels.Person>(new Bogus.Person("fr")),
             };
 
             context.Persons.AddRange(persons);

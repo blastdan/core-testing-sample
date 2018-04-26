@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace CoreTestingSample.Test.Services
 {
@@ -19,6 +21,12 @@ namespace CoreTestingSample.Test.Services
         Faker<Context.DataModels.Person> personFake;
         Faker<Context.DataModels.Address> addressFake;
         Faker<Context.DataModels.Company> companyFake;
+
+        [OneTimeSetUp]
+        public void FixtureSetUp()
+        {
+            Bootstrap.AutoMapper();
+        }
 
         [SetUp]
         public void Setup()
@@ -43,8 +51,6 @@ namespace CoreTestingSample.Test.Services
                 .RuleFor(c => c.Bs, f => f.Company.Bs())
                 .RuleFor(c => c.CatchPhrase, f => f.Company.CatchPhrase())
                 .RuleFor(c => c.Name, f => f.Company.CompanyName());
-
-            Bootstrap.AutoMapper();
         }
 
         [Test, Description("Gets all the users and maps them to the People model")]
@@ -72,6 +78,69 @@ namespace CoreTestingSample.Test.Services
                 }
             };
             var Actual = Target.GetAllPeople();
+
+            Actual.Should().BeEquivalentTo(Expected, "the service should have mapped the data properly");
+        }
+
+        [Test, Description("Gets all the users and maps them to the People model")]
+        [Category("Business Logic")]
+        public void GetAllPeopleAsyncSuccessTest()
+        {
+            var people = Task.FromResult(GeneratePeople(1));
+
+            var repoMock = new Mock<IPersonRepository>();
+            repoMock.Setup(r => r.GetAsync(null, null)).Returns(people);
+
+            var Target = new PersonService(repoMock.Object);
+            var Expected = new List<People>()
+            {
+                new People(){
+                    Avatar = people.Result.First().Avatar,
+                    DateOfBirth = people.Result.First().DateOfBirth,
+                    Email = people.Result.First().Email,
+                    FirstName = people.Result.First().FirstName,
+                    LastName = people.Result.First().LastName,
+                    Phone = people.Result.First().Phone,
+                    UserName = people.Result.First().UserName,
+                    Website = people.Result.First().Website,
+                    Id = people.Result.First().Id
+                }
+            };
+            var Actual = Target.GetAllPeopleAsync().Result;
+
+            Actual.Should().BeEquivalentTo(Expected, "the service should have mapped the data properly");
+        }
+
+        [Test, Description("Gets all the users and maps them to the People model")]
+        [Category("Business Logic")]
+        public void SearchPeopleFirstNameSuccess()
+        {
+            var people = Task.FromResult(GeneratePeople(1));
+            people.Result.First().FirstName = "Daniel";
+            people.Result.First().LastName = "McCrady";
+
+            var repoMock = new Mock<IPersonRepository>();
+            repoMock.Setup(r => r.GetAsync(
+                                           It.IsAny<Expression<Func<Context.DataModels.Person, bool>>>(), 
+                                           null))
+                                           .Returns(people);
+
+            var Target = new PersonService(repoMock.Object);
+            var Expected = new List<People>()
+            {
+                new People(){
+                    Avatar = people.Result.First().Avatar,
+                    DateOfBirth = people.Result.First().DateOfBirth,
+                    Email = people.Result.First().Email,
+                    FirstName = "Daniel",
+                    LastName = "McCrady",
+                    Phone = people.Result.First().Phone,
+                    UserName = people.Result.First().UserName,
+                    Website = people.Result.First().Website,
+                    Id = people.Result.First().Id
+                }
+            };
+            var Actual = Target.SearchPeople("Dan").Result;
 
             Actual.Should().BeEquivalentTo(Expected, "the service should have mapped the data properly");
         }

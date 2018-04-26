@@ -29,7 +29,7 @@ namespace CoreTestingSample.Services
             return persons.Select(p => Mapper.Map<People>(p));
         }
 
-        public async Task<IEnumerable<People>> GetAllPeopleAsync(string nameSearch)
+        public async Task<IEnumerable<People>> SearchPeople(string nameSearch)
         {
             var persons =  await this.personRepository.GetAsync(x => x.FirstName.StartsWith(nameSearch) ||
                                                         x.LastName.StartsWith(nameSearch));

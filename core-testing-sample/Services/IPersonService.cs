@@ -8,6 +8,6 @@ namespace CoreTestingSample.Services
     {
         IEnumerable<People> GetAllPeople();
         Task<IEnumerable<People>> GetAllPeopleAsync();
-        Task<IEnumerable<People>> GetAllPeopleAsync(string nameSearch);
+        Task<IEnumerable<People>> SearchPeople(string nameSearch);
     }
 }
